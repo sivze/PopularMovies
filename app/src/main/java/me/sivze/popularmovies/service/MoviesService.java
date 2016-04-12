@@ -67,7 +67,7 @@ public class MoviesService extends AsyncTask<String, Void, List<MovieModel>> {
             moviesResponse = buffer.toString();
 
         } catch (IOException e) {
-            Log.e("PlaceholderFragment", "Error ", e);
+            Log.e(MoviesService.class.getSimpleName(), "Error: ", e);
             moviesResponse = null;
         }
 
