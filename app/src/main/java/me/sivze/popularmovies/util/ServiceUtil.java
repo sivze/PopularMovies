@@ -19,7 +19,7 @@ public class ServiceUtil {
 
         Uri moviesServiceUri = Uri.parse(MOVIES_BASE_URL).buildUpon()
                 .appendPath(sortType)
-                .appendQueryParameter(API_KEY_PARAM, "04514068c761482f8ca2912905651833")
+                .appendQueryParameter(API_KEY_PARAM, KeyKeeper.movieDBAPIkey)
                 .build();
 
 
