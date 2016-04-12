@@ -2,7 +2,7 @@
 
 This app needs an API key from https://www.themoviedb.org/ to function. 
 
-Creare a class named KeyKeeper.java in the directory: me/sivze/popularmovies/util
+Create a class named KeyKeeper.java in the directory: me/sivze/popularmovies/util
 
 The class looks as follows:
 
