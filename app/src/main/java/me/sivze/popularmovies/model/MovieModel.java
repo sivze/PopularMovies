@@ -48,7 +48,7 @@ public class MovieModel implements Serializable {
     private String backdropPath;
 
     @Expose
-    private Double popularity;
+    private Float popularity;
 
     @SerializedName("vote_count")
     @Expose
@@ -59,7 +59,7 @@ public class MovieModel implements Serializable {
 
     @SerializedName("vote_average")
     @Expose
-    private Double voteAverage;
+    private Float voteAverage;
     /**
      *
      * @return
@@ -227,7 +227,7 @@ public class MovieModel implements Serializable {
      * @return
      * The popularity
      */
-    public Double getPopularity() {
+    public Float getPopularity() {
         return popularity;
     }
 
@@ -236,7 +236,7 @@ public class MovieModel implements Serializable {
      * @param popularity
      * The popularity
      */
-    public void setPopularity(Double popularity) {
+    public void setPopularity(Float popularity) {
         this.popularity = popularity;
     }
 
@@ -281,7 +281,7 @@ public class MovieModel implements Serializable {
      * @return
      * The voteAverage
      */
-    public Double getVoteAverage() {
+    public Float getVoteAverage() {
         return voteAverage;
     }
 
@@ -290,7 +290,7 @@ public class MovieModel implements Serializable {
      * @param voteAverage
      * The vote_average
      */
-    public void setVoteAverage(Double voteAverage) {
+    public void setVoteAverage(Float voteAverage) {
         this.voteAverage = voteAverage;
     }
 

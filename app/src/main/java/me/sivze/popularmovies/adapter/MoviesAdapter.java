@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.sivze.popularmovies.R;
+import me.sivze.popularmovies.listener.OnItemClickListener;
 import me.sivze.popularmovies.model.MovieModel;
 import me.sivze.popularmovies.util.ServiceUtil;
 
@@ -22,11 +23,12 @@ import me.sivze.popularmovies.util.ServiceUtil;
  * Created by Siva on 4/6/2016.
  */
 
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieHolder>{
+public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieHolder> {
 
-    private final Context mContext;
-    private final LayoutInflater mInflater;
+    private Context mContext;
+    private LayoutInflater mInflater;
     private List<MovieModel> mMovieList;
+    private OnItemClickListener mItemClickListener;
 
     public MoviesAdapter(Context context, @NonNull List<MovieModel> movies) {
         mInflater = LayoutInflater.from(context);
@@ -36,13 +38,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieHolde
 
     @Override
     public MovieHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = mInflater.inflate(R.layout.movie_poster,parent,false);
+        View itemView = mInflater.inflate(R.layout.movie_poster, parent, false);
         return new MovieHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(MovieHolder holder, int position) {
-        holder.bindMovieItem(mMovieList.get(position));
+        holder.bindMovieItem(mMovieList.get(position), mItemClickListener);
     }
 
     @Override
@@ -50,23 +52,35 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieHolde
         return mMovieList.size();
     }
 
-    public void updateDataSet(List<MovieModel> newMovies){
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mItemClickListener = onItemClickListener;
+    }
+
+    public void updateDataSet(List<MovieModel> newMovies) {
         mMovieList.clear();
         mMovieList.addAll(newMovies);
         this.notifyDataSetChanged();
     }
 
-    public static final class MovieHolder extends RecyclerView.ViewHolder{
+    public static final class MovieHolder extends RecyclerView.ViewHolder {
         ImageView mPoster;
-        public MovieHolder(View view){
+
+        public MovieHolder(View view) {
             super(view);
             mPoster = (ImageView) view.findViewById(R.id.movie_poster_image_view);
         }
 
-        public void bindMovieItem(@NonNull final MovieModel movie){
+        public void bindMovieItem(@NonNull final MovieModel movie, @NonNull final OnItemClickListener listener) {
             Glide.with(itemView.getContext())
                     .load(ServiceUtil.buildPosterUrl(movie.getPosterPath()))
                     .into(mPoster);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(movie);
+                }
+            });
         }
     }
 }

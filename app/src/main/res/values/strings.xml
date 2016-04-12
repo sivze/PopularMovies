@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Popular Movies</string>
-    <string name="action_settings">Settings</string>
+
+    <string name="menu_sort_type">Sort Type</string>
+    <string name="pref_most_popular">Most Popular</string>
+    <string name="pref_top_rated">Top Rated</string>
+
+    <string name="title_activity_movie_details">MovieDetailsActivity</string>
 </resources>
