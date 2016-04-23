@@ -1,314 +1,110 @@
 package me.sivze.popularmovies.model;
 
-import com.google.gson.annotations.Expose;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.text.TextUtils;
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import me.sivze.popularmovies.util.Constants;
 
 /**
  * Created by Siva on 4/6/2016.
  */
-public class MovieModel implements Serializable {
-    @SerializedName("poster_path")
-    @Expose
-    private String posterPath;
-
-    @Expose
-    private Boolean adult;
-
-    @Expose
-    private String overview;
-
-    @SerializedName("release_date")
-    @Expose
-    private String releaseDate;
-
-    @SerializedName("genre_ids")
-    @Expose
-    private List<Integer> genreIds = new ArrayList<Integer>();
-
-    @Expose
-    private Integer id;
-
+public class MovieModel implements Parcelable {
+    public Long _id;
+    public long id;
     @SerializedName("original_title")
-    @Expose
-    private String originalTitle;
-
-    @SerializedName("original_language")
-    @Expose
-    private String originalLanguage;
-
-    @Expose
-    private String title;
-
+    public String originalTitle;
+    public String overview;
+    @SerializedName("release_date")
+    public String releaseDate;
+    @SerializedName("poster_path")
+    public String posterPath;
     @SerializedName("backdrop_path")
-    @Expose
-    private String backdropPath;
-
-    @Expose
-    private Float popularity;
-
-    @SerializedName("vote_count")
-    @Expose
-    private Integer voteCount;
-
-    @Expose
-    private Boolean video;
-
+    public String backdropPath;
     @SerializedName("vote_average")
-    @Expose
-    private Float voteAverage;
-    /**
-     *
-     * @return
-     * The adult
-     */
-    public Boolean getAdult() {
-        return adult;
+    public double voteAverage;
+    @SerializedName("vote_count")
+    public int voteCount;
+    public double popularity;
+
+    public Date getFormattedDate() {
+        if (!TextUtils.isEmpty(releaseDate)) {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.MOVIE_DATE_FORMAT);
+            try {
+                return simpleDateFormat.parse(releaseDate);
+            } catch (ParseException e) {
+                Log.e("MovieData", "getFormattedDate() returned error: " + e);
+            }
+        }
+        return null;
     }
 
-    /**
-     *
-     * @param adult
-     * The adult
-     */
-    public void setAdult(Boolean adult) {
-        this.adult = adult;
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    /**
-     *
-     * @return
-     * The backdropPath
-     */
-    public String getBackdropPath() {
-        return backdropPath;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this._id);
+        dest.writeLong(this.id);
+        dest.writeString(this.originalTitle);
+        dest.writeString(this.overview);
+        dest.writeString(this.releaseDate);
+        dest.writeString(this.posterPath);
+        dest.writeString(this.backdropPath);
+        dest.writeDouble(this.voteAverage);
+        dest.writeInt(this.voteCount);
+        dest.writeDouble(this.popularity);
     }
 
-    /**
-     *
-     * @param backdropPath
-     * The backdrop_path
-     */
-    public void setBackdropPath(String backdropPath) {
-        this.backdropPath = backdropPath;
+    public MovieModel() {
     }
 
-    /**
-     *
-     * @return
-     * The genreIds
-     */
-    public List<Integer> getGenreIds() {
-        return genreIds;
+    protected MovieModel(Parcel in) {
+        this._id = (Long) in.readValue(Long.class.getClassLoader());
+        this.id = in.readLong();
+        this.originalTitle = in.readString();
+        this.overview = in.readString();
+        this.releaseDate = in.readString();
+        this.posterPath = in.readString();
+        this.backdropPath = in.readString();
+        this.voteAverage = in.readDouble();
+        this.voteCount = in.readInt();
+        this.popularity = in.readDouble();
     }
 
-    /**
-     *
-     * @param genreIds
-     * The genre_ids
-     */
-    public void setGenreIds(List<Integer> genreIds) {
-        this.genreIds = genreIds;
-    }
+    public static final Parcelable.Creator<MovieModel> CREATOR = new Parcelable.Creator<MovieModel>() {
+        public MovieModel createFromParcel(Parcel source) {
+            return new MovieModel(source);
+        }
 
-    /**
-     *
-     * @return
-     * The id
-     */
-    public Integer getId() {
-        return id;
-    }
+        public MovieModel[] newArray(int size) {
+            return new MovieModel[size];
+        }
+    };
 
-    /**
-     *
-     * @param id
-     * The id
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @Override
+    public String toString() {
+        return "MovieData{" +
+                "_id=" + _id +
+                ", id=" + id +
+                ", originalTitle='" + originalTitle + '\'' +
+                ", overview='" + overview + '\'' +
+                ", releaseDate='" + releaseDate + '\'' +
+                ", posterPath='" + posterPath + '\'' +
+                ", backdropPath='" + backdropPath + '\'' +
+                ", voteAverage=" + voteAverage +
+                ", voteCount=" + voteCount +
+                ", popularity=" + popularity +
+                '}';
+    }}
 
-    /**
-     *
-     * @return
-     * The originalLanguage
-     */
-    public String getOriginalLanguage() {
-        return originalLanguage;
-    }
-
-    /**
-     *
-     * @param originalLanguage
-     * The original_language
-     */
-    public void setOriginalLanguage(String originalLanguage) {
-        this.originalLanguage = originalLanguage;
-    }
-
-    /**
-     *
-     * @return
-     * The originalTitle
-     */
-    public String getOriginalTitle() {
-        return originalTitle;
-    }
-
-    /**
-     *
-     * @param originalTitle
-     * The original_title
-     */
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
-    }
-
-    /**
-     *
-     * @return
-     * The overview
-     */
-    public String getOverview() {
-        return overview;
-    }
-
-    /**
-     *
-     * @param overview
-     * The overview
-     */
-    public void setOverview(String overview) {
-        this.overview = overview;
-    }
-
-    /**
-     *
-     * @return
-     * The releaseDate
-     */
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    /**
-     *
-     * @param releaseDate
-     * The release_date
-     */
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    /**
-     *
-     * @return
-     * The posterPath
-     */
-    public String getPosterPath() {
-        return posterPath;
-    }
-
-    /**
-     *
-     * @param posterPath
-     * The poster_path
-     */
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
-    }
-
-    /**
-     *
-     * @return
-     * The popularity
-     */
-    public Float getPopularity() {
-        return popularity;
-    }
-
-    /**
-     *
-     * @param popularity
-     * The popularity
-     */
-    public void setPopularity(Float popularity) {
-        this.popularity = popularity;
-    }
-
-    /**
-     *
-     * @return
-     * The title
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     *
-     * @param title
-     * The title
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    /**
-     *
-     * @return
-     * The video
-     */
-    public Boolean getVideo() {
-        return video;
-    }
-
-    /**
-     *
-     * @param video
-     * The video
-     */
-    public void setVideo(Boolean video) {
-        this.video = video;
-    }
-
-    /**
-     *
-     * @return
-     * The voteAverage
-     */
-    public Float getVoteAverage() {
-        return voteAverage;
-    }
-
-    /**
-     *
-     * @param voteAverage
-     * The vote_average
-     */
-    public void setVoteAverage(Float voteAverage) {
-        this.voteAverage = voteAverage;
-    }
-
-    /**
-     *
-     * @return
-     * The voteCount
-     */
-    public Integer getVoteCount() {
-        return voteCount;
-    }
-
-    /**
-     *
-     * @param voteCount
-     * The vote_count
-     */
-    public void setVoteCount(Integer voteCount) {
-        this.voteCount = voteCount;
-    }
-}

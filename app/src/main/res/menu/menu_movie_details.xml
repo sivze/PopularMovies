@@ -1,6 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activity.MovieDetailsActivity">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item app:showAsAction="always"
+        android:icon="@drawable/ic_share_white"
+        android:id="@+id/share_movie"
+        android:title="@string/share"  />
 </menu>

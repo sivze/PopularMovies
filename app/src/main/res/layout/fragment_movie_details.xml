@@ -1,105 +1,33 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/movie_container"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".fragment.MovieDetailsFragment"
-        tools:showIn="@layout/activity_movie_details">
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/frame_toolbar_movie_detail" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/movie_poster_detail_height">
+    <include
+        android:id="@+id/inc_movie_detail"
+        layout="@layout/frame_movie_detail" />
 
-            <ImageView
-                android:id="@+id/movie_poster_image_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
+    <include
+        android:id="@+id/inc_no_selected_movie"
+        layout="@layout/error_no_movie_selected" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/gradient_black" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/favorite_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:clickable="true"
+        android:contentDescription="@string/movie_detail_add_favorite"
+        android:src="@drawable/ic_favorite_outline"
+        app:elevation="4dp"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="bottom|right|end" />
 
-            <TextView
-                android:id="@+id/movie_release_date_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginBottom="10dp"
-
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:singleLine="true"
-                android:text="2012"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/sub_title_text_size" />
-
-            <TextView
-                android:id="@+id/movie_title_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/movie_release_date_text_view"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:layout_marginTop="5dip"
-                android:text="The Lord of the Rings"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/title_text_size" />
-
-            <TextView
-                android:id="@+id/movie_rating_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
-                android:text="(2.5)"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/sub_title_text_size" />
-
-            <RatingBar
-                android:id="@+id/movie_rating_bar"
-                style="?android:attr/ratingBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="13dp"
-                android:layout_marginRight="10dp"
-                android:layout_toLeftOf="@id/movie_rating_text_view"
-                android:isIndicator="true"
-                android:numStars="10"
-                android:progressBackgroundTint="@android:color/darker_gray"
-                android:progressTint="@android:color/white"
-                android:rating="2.5"
-                android:scaleX="1"
-                android:scaleY="1"
-                android:secondaryProgressTint="@android:color/darker_gray"
-                android:stepSize="0.5" />
-
-
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Overview"
-            android:textColor="#000000"
-            android:textSize="@dimen/title_text_size" />
-
-        <TextView
-            android:id="@+id/movie_description_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Cool mvo"
-            android:textSize="@dimen/sub_title_text_size" />
-    </LinearLayout>
-</ScrollView>
+</android.support.design.widget.CoordinatorLayout>

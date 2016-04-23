@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "me.sivze.popularmovies"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -20,15 +20,36 @@ android {
 }
 
 repositories {
-    mavenCentral() // jcenter() works as well because it pulls from Maven Central
+    mavenCentral()
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.0'
-    compile 'com.android.support:design:23.2.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.google.code.gson:gson:2.2.+'
+
+    compile 'com.android.support:cardview-v7:23.0.1'
+    //for image download
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
+    //for json parsing
+    compile 'com.google.code.gson:gson:2.3.1'
+
     compile 'com.android.support:support-v4:23.2.0'
+    compile 'com.android.support:recyclerview-v7:23.2.0'
+    compile 'com.android.support:design:23.1.0'
+    compile 'com.android.support:palette-v7:23.0.1'
+
+    //easy binding views
+    compile 'com.jakewharton:butterknife:7.0.1'
+
+    //for simply storing and retrieving objects used for favorites module. It extends SQLiteContentProvider.
+    compile 'nl.qbusict:cupboard:2.1.4'
+    compile 'nl.littlerobots:cupboard-tools:0.2.0'
+
+    //Type safe HTTP client
+    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
+    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+
+    //Debug tool for chrome
+    compile 'com.facebook.stetho:stetho:1.2.0'
 }
